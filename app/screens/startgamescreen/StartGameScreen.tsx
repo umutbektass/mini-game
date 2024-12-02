@@ -1,7 +1,7 @@
 import { Alert, Keyboard, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
-import PrimaryButton from '@/app/components/PrimaryButton'
-import Color from '../../contants/Color'
+import PrimaryButton from '@/app/components/ui/PrimaryButton'
+import Color from '../../contants/color'
 type StartGameScreenProps = {
   onPickNumber:(pickNumber:number)=>void
 }

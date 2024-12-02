@@ -9,22 +9,23 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
 import {StartGameScreen ,GameScreen} from './screens'
 import { LinearGradient } from 'expo-linear-gradient';
-import Color from './contants/Color';
+import Color from './contants/color';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 
 export default function RootLayout() {
   const [userNumber,setUserNumber] = useState<number>()
 
+ 
   const pickedNumberHandler = (pickNumber:number)=>{
     setUserNumber(pickNumber)
   }
     let screen = <StartGameScreen  onPickNumber={pickedNumberHandler}/>
 
-    
+
 
 
     if(userNumber){
-      screen = <GameScreen/>
+      screen = <GameScreen userNumber={userNumber}/>
     }
 
   return (

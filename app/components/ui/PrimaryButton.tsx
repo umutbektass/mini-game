@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Color from '../contants/Color'
+import Color from '../../contants/color'
 type PrimaryButtonProps = {
     children:React.ReactNode,
     onPress:()=>void
@@ -15,7 +15,6 @@ const PrimaryButton:React.FC<PrimaryButtonProps> = ({children,onPress}) => {
       <Text style={styles.buttonText}>{children}</Text>
     </Pressable>
     </View>
-
   )
 }
 
