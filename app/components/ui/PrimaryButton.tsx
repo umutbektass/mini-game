@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
    shadowColor:'black',
    shadowOffset:{width:0,height:0},
    shadowOpacity:0.2,
-   shadowRadius:10
+   shadowRadius:10,
   },
   buttonInnerContainer:{
     backgroundColor:Color.primary500,

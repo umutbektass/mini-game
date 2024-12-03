@@ -1,23 +1,39 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+
+import {  useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
-import {StartGameScreen ,GameScreen} from './screens'
+import { ImageBackground, SafeAreaView, StyleSheet,ActivityIndicator,View } from 'react-native';
+import {StartGameScreen ,GameScreen,GameOverScreen} from './screens'
 import { LinearGradient } from 'expo-linear-gradient';
 import Color from './contants/color';
+import { SplashScreen } from 'expo-router';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 
 export default function RootLayout() {
-  const [userNumber,setUserNumber] = useState<number>()
+  const [fontsLoaded] = useFonts({
+    'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
 
+  });
+
+    useEffect(()=>{
+      if(!fontsLoaded){
+        <View style={[styles.rootScreen,{alignItems:'center',justifyContent:'center'}]}>
+            <ActivityIndicator size='large'/>
+        </View>
+      }
+    },[fontsLoaded])
+
+  const [userNumber,setUserNumber] = useState<number>()
+  const [gameIsOver,setGameIsOver] = useState<boolean>(false)
  
   const pickedNumberHandler = (pickNumber:number)=>{
     setUserNumber(pickNumber)
+  }
+
+  const gameOverHandler =()=>{
+    setGameIsOver(true)
   }
     let screen = <StartGameScreen  onPickNumber={pickedNumberHandler}/>
 
@@ -25,7 +41,10 @@ export default function RootLayout() {
 
 
     if(userNumber){
-      screen = <GameScreen userNumber={userNumber}/>
+      screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>
+    }
+    if(gameIsOver){
+      screen = <GameOverScreen/>
     }
 
   return (
